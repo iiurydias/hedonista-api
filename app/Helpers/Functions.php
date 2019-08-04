@@ -7,7 +7,7 @@ class Functions {
     {
         if ($message != ""){
     	$response = [
-            'status' => 'ok',
+            'success' => true,
             'data'    => $result,
             'message' => $message,
         ];
@@ -24,7 +24,7 @@ class Functions {
     static function sendError($error, $errorMessages = [], $code = 404)
     {
     	$response = [
-            'status' => 'failed',
+            'success' => false,
             'message' => $error,
         ];
         if ($errorMessages != []) {
