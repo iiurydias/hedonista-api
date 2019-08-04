@@ -13,5 +13,5 @@ class Point extends Model
     
     public function author(){
         return $this->belongsTo('App\User', 'fk_user');
-     }
+    }
 }
