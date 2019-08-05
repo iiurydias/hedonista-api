@@ -23,7 +23,8 @@ class HomeDataController extends Controller
         $favorites = Favorite::where('fk_user', $user->id)->with("point")->get();
         $favorites->map(function ($item) {
             $point =  Point::where('id', $item->fk_point)->get()->first();
-            $category =  Category::where('id', $point->fk_category)->get()->first();
+            $subcategory =  Subcategory::where('id', $point->fk_subcategory)->get()->first();
+            $category =  Category::where('id', $subcategory->fk_category)->get()->first();
             $item['icon'] = $category->icon;
             return $item;
           });
