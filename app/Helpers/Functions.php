@@ -14,7 +14,7 @@ class Functions {
         return response()->json($response, 200);
     }
         $response = [
-            'status' => 'ok',
+            'success' => true,
             'data'    => $result
         ];
         return response()->json($response, 200);
