@@ -7,6 +7,7 @@ use App\User;
 use App\Favorite;
 use App\Category;
 use App\Point;
+use App\Subcategory;
 use App\Helpers\Functions;
 
 class HomeDataController extends Controller
