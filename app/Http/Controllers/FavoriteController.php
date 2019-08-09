@@ -13,7 +13,7 @@ class FavoriteController extends Controller
     protected function create(Request $request)
     {
         $data = $request->all();
-        $user = User::where('api_token', $data['token'])->first();
+        $user = User::where('api_token', $request->header('token'))->first();
         $validator = Validator::make($data, [
             'point_id' => 'required|numeric'
         ]);
@@ -36,7 +36,7 @@ class FavoriteController extends Controller
         if($validator->fails()){
             return Functions::sendError('Erro na validacao', $validator->errors(), 401);       
         }
-        $user = User::where('api_token', $data['token'])->first();
+        $user = User::where('api_token', $request->header('token'))->first();
         $favorite = Favorite::where('fk_user', $user->id)->where('id', $data["favorite_id"])->first();
         if($favorite){
             Favorite::where('id',$data['favorite_id'])->delete();

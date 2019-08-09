@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 
 
-Route::post('/createUser', [
+Route::post('/user', [
     'uses'=> 'UserController@create',
     'as' => 'create.user'
 ]);
@@ -12,11 +12,11 @@ Route::get('/login', [
     'as' => 'get.user'
 ]);
 Route::middleware('auth:api')->group(function () {
-    Route::get('/getHomeData', [
+    Route::get('/homedata', [
         'uses'=> 'HomeDataController@get',
         'as' => 'get.homeData'
     ]);
-    Route::post('/toFavorite', [
+    Route::post('/tofavorite', [
         'uses'=> 'FavoriteController@create',
         'as' => 'create.favorite'
     ]);
@@ -24,19 +24,19 @@ Route::middleware('auth:api')->group(function () {
         'uses'=> 'FavoriteController@delete',
         'as' => 'delete.favorite'
     ]);
-    Route::get('/getSubcategories', [
+    Route::get('/subcategories', [
         'uses'=> 'SubcategoryController@get',
         'as' => 'get.subcategory'
     ]);
-    Route::post('/createSubcategory', [
+    Route::post('/subcategory', [
         'uses'=> 'SubcategoryController@create',
         'as' => 'create.subcategory'
     ]);
-    Route::get('/getPointsBySubcategory', [
+    Route::get('/pointsbysubcategory', [
         'uses'=> 'PointController@get',
         'as' => 'get.point'
     ]);
-    Route::post('/createPoint', [
+    Route::post('/point', [
         'uses'=> 'PointController@create',
         'as' => 'create.point'
     ]);

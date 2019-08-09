@@ -17,9 +17,9 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next,...$guards)
     {
-        $data = $request->all();
-        if(array_key_exists('token', $data)){
-            if (User::where('api_token', '=', $data['token'])->count() == 0) {
+        $token = $request->header('token');
+        if($token != null){
+            if (User::where('api_token', '=', $token)->count() == 0) {
             return Functions::sendError('Busca nao autorizada', "", 403);     
             }
             return $next($request);

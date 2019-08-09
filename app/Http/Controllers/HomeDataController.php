@@ -20,7 +20,7 @@ class HomeDataController extends Controller
             return $item;
           });
         $data = $request->all();
-        $user = User::where('api_token', $data['token'])->first();
+        $user = User::where('api_token', $request->header('token'))->first();
         $favorites = Favorite::where('fk_user', $user->id)->with("point")->get();
         $favorites->map(function ($item) {
             $point =  Point::where('id', $item->fk_point)->get()->first();
