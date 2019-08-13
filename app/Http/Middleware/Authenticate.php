@@ -20,7 +20,7 @@ class Authenticate extends Middleware
         $token = $request->header('token');
         if($token != null){
             if (User::where('api_token', '=', $token)->count() == 0) {
-            return Functions::sendError('Busca nao autorizada', "", 403);     
+            return Functions::sendError('Requisiçao nao autorizada', "", 403);     
             }
             return $next($request);
         }else{

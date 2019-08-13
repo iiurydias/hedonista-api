@@ -40,4 +40,12 @@ Route::middleware('auth:api')->group(function () {
         'uses'=> 'PointController@create',
         'as' => 'create.point'
     ]);
+    Route::get('/comments', [
+        'uses'=> 'CommentController@get',
+        'as' => 'get.comments'
+    ]);
+    Route::post('/comment', [
+        'uses'=> 'CommentController@create',
+        'as' => 'create.comment'
+    ]);
 });
