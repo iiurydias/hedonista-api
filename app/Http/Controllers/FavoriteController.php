@@ -13,19 +13,22 @@ class FavoriteController extends Controller
     protected function create(Request $request)
     {
         $data = $request->all();
-        $user = User::where('api_token', $request->header('token'))->first();
         $validator = Validator::make($data, [
             'point_id' => 'required|numeric'
         ]);
-
         if($validator->fails()){
             return Functions::sendError('Erro na validacao', $validator->errors(), 401);       
         }
-        $user = Favorite::create([
-            'fk_user' => $user->id,
-            'fk_point' => $data['point_id']
-        ]);
-        return Functions::sendResponse($user->toArray(), 'Ponto favoritado com sucesso.');
+        $user = User::where('api_token', $request->header('token'))->first();
+        $favorite = Favorite::where('fk_user', $user->id)->where('fk_point', $data['point_id'])->first();
+        if ($favorite == null){
+            $favorite = Favorite::create([
+                'fk_user' => $user->id,
+                'fk_point' => $data['point_id']
+            ]);
+            return Functions::sendResponse($favorite->toArray(), 'Ponto favoritado com sucesso.');
+        }
+        return Functions::sendError("Ponto já favoritado!","", 401);       
     }
     protected function delete(Request $request)
     {
