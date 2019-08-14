@@ -16,4 +16,7 @@ class Favorite extends Model
     public function point(){
        return $this->belongsTo('App\Point', 'fk_point');
     }
+    public function author(){
+        return $this->belongsTo('App\User', 'fk_user');
+    }
 }

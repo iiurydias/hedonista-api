@@ -21,7 +21,7 @@ class HomeDataController extends Controller
           });
         $data = $request->all();
         $user = User::where('api_token', $request->header('token'))->first();
-        $favorites = Favorite::where('fk_user', $user->id)->with("point")->get();
+        $favorites = Favorite::where('fk_user', $user->id)->with("point")->with("author")->get();
         $favorites->map(function ($item) {
             $point =  Point::where('id', $item->fk_point)->get()->first();
             $subcategory =  Subcategory::where('id', $point->fk_subcategory)->get()->first();
