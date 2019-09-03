@@ -16,7 +16,13 @@ class HomeDataController extends Controller
     {
         $categories = Category::get();
         $categories->map(function ($item) {
-            $item['pointsNumber'] =  Point::where('id', $item->id)->get()->count();
+            $pointsNumber = 0;
+            $subcategories = Subcategory::where('fk_category', $item->id)->get();
+            $subcategories->map(function ($item) use (&$pointsNumber){
+              $pointsNumberBySubcategory = Point::where('fk_subcategory', $item->id)->get()->count();
+              $pointsNumber += $pointsNumberBySubcategory;
+            });
+            $item['pointsNumber'] = $pointsNumber;
             return $item;
           });
         $data = $request->all();

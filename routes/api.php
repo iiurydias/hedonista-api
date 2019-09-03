@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 
-
 Route::post('/user', [
     'uses'=> 'UserController@create',
     'as' => 'create.user'
@@ -11,6 +10,14 @@ Route::get('/login', [
     'uses'=> 'UserController@get',
     'as' => 'get.user'
 ]);
+Route::post('/sendmail', [
+    'uses'=> 'UserController@sendEmailRecoverPass',
+    'as' => 'sendEmailRecoverPass.user'
+    ]);
+Route::post('/updatePass', [
+    'uses'=> 'UserController@update',
+    'as' => 'update.user'
+    ]);
 Route::middleware('auth:api')->group(function () {
     Route::get('/homedata', [
         'uses'=> 'HomeDataController@get',
@@ -48,4 +55,5 @@ Route::middleware('auth:api')->group(function () {
         'uses'=> 'CommentController@create',
         'as' => 'create.comment'
     ]);
+    
 });
